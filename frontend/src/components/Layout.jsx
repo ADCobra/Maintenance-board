@@ -21,12 +21,12 @@ import {
 } from 'lucide-react';
 
 const CoalIndiaLogo = () => (
-  <div className="ci-keep-white flex items-center justify-center w-14 h-14 rounded-full border-4 border-amber-400 bg-white shadow-lg overflow-hidden shrink-0">
+  <div className="ci-keep-white flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 sm:border-4 border-amber-400 bg-white shadow-lg overflow-hidden shrink-0">
     <div className="flex flex-col items-center leading-none">
-      <span className="text-[9px] font-black text-green-800 tracking-tighter">COAL</span>
-      <span className="text-[9px] font-black text-green-800 tracking-tighter">INDIA</span>
+      <span className="text-[7px] sm:text-[9px] font-black text-green-800 tracking-tighter">COAL</span>
+      <span className="text-[7px] sm:text-[9px] font-black text-green-800 tracking-tighter">INDIA</span>
       <div className="w-full h-px bg-amber-500 my-0.5" />
-      <span className="text-[6px] text-green-700 font-semibold tracking-tighter text-center leading-tight">A MAHARATNA<br/>COMPANY</span>
+      <span className="text-[5px] sm:text-[6px] text-green-700 font-semibold tracking-tighter text-center leading-tight">A MAHARATNA<br/>COMPANY</span>
     </div>
   </div>
 );
@@ -49,7 +49,8 @@ const Layout = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Drawer state — only relevant on mobile (< lg). On desktop the sidebar is always shown.
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('ci-theme');
     return saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -59,6 +60,11 @@ const Layout = () => {
     document.documentElement.classList.toggle('dark', isDark);
     localStorage.setItem('ci-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
+
+  // Close the mobile drawer whenever the route changes
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = async () => {
     await logout();
@@ -75,9 +81,9 @@ const Layout = () => {
     <div className="flex flex-col h-screen overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
 
       {/* Top utility bar – Coal India black bar */}
-      <div className="w-full bg-black text-white text-xs flex items-center justify-between px-4 py-1 shrink-0 z-50">
-        <span className="text-gray-300">{today}</span>
-        <div className="flex items-center gap-4 text-gray-300">
+      <div className="w-full bg-black text-white text-[11px] sm:text-xs flex items-center justify-between px-3 sm:px-4 py-1 shrink-0 z-50">
+        <span className="text-gray-300 truncate">{today}</span>
+        <div className="hidden sm:flex items-center gap-4 text-gray-300">
           <span className="border-r border-gray-600 pr-4 text-white font-semibold">Coal India Limited</span>
           <span>Maintenance Management System</span>
         </div>
@@ -85,31 +91,32 @@ const Layout = () => {
 
       {/* Header bar – Coal India branding (white in light, deep green in dark) */}
       <div
-        className="w-full flex items-center justify-between px-6 py-2 shrink-0 z-40 border-b-4"
+        className="w-full flex items-center justify-between px-3 sm:px-6 py-2 shrink-0 z-40 border-b-4 gap-2"
         style={{ backgroundColor: isDark ? '#0d3a1c' : '#fff', borderBottomColor: '#f5a623' }}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          {/* Hamburger – mobile only */}
           <button
             onClick={() => setSidebarOpen(o => !o)}
-            className="p-1.5 rounded transition-colors"
+            className="p-1.5 rounded transition-colors lg:hidden shrink-0"
             style={{ color: isDark ? '#c8e6c9' : '#374151' }}
-            aria-label="Toggle sidebar"
+            aria-label="Toggle navigation menu"
           >
-            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
           <CoalIndiaLogo />
-          <div className="flex flex-col leading-tight">
-            <span className="text-2xl font-black tracking-tight" style={{ color: isDark ? '#f5a623' : '#1a5c28' }}>
+          <div className="flex flex-col leading-tight min-w-0">
+            <span className="text-lg sm:text-2xl font-black tracking-tight truncate" style={{ color: isDark ? '#f5a623' : '#1a5c28' }}>
               COAL INDIA
             </span>
-            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest truncate" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
               Maintenance Board
             </span>
           </div>
         </div>
 
         {/* User info + theme toggle in header */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             onClick={() => setIsDark(d => !d)}
             className="p-2 rounded-full border transition-colors"
@@ -127,7 +134,7 @@ const Layout = () => {
             <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{user?.role}</p>
           </div>
           <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
             style={{ backgroundColor: '#1a5c28' }}
           >
             {user?.name?.[0]?.toUpperCase()}
@@ -141,33 +148,43 @@ const Layout = () => {
         style={{ backgroundColor: '#f5a623', minHeight: '28px' }}
       >
         <div
-          className="px-4 py-1 text-xs font-black text-white shrink-0 flex items-center gap-1"
+          className="px-3 sm:px-4 py-1 text-xs font-black text-white shrink-0 flex items-center gap-1"
           style={{ backgroundColor: '#1a5c28' }}
         >
           <span>⚡</span>
           <span>UPDATES</span>
         </div>
-        <div className="flex items-center gap-6 px-4 text-xs font-semibold text-gray-900 overflow-hidden">
+        <div className="flex items-center gap-4 sm:gap-6 px-3 sm:px-4 text-xs font-semibold text-gray-900 overflow-hidden whitespace-nowrap">
           <span>Welcome to Coal India Maintenance Management System</span>
-          <span>•</span>
-          <span>Raise tickets for electrical, mechanical & civil maintenance</span>
-          <span>•</span>
-          <span>For emergencies contact the control room immediately</span>
+          <span className="hidden sm:inline">•</span>
+          <span className="hidden sm:inline">Raise tickets for electrical, mechanical &amp; civil maintenance</span>
+          <span className="hidden sm:inline">•</span>
+          <span className="hidden sm:inline">For emergencies contact the control room immediately</span>
         </div>
       </div>
 
       {/* Body: sidebar + main */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
 
-        {/* Sidebar – dark forest green */}
+        {/* Mobile backdrop */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Sidebar – static column on desktop, slide-in drawer on mobile */}
         <aside
-          className="flex flex-col shrink-0 overflow-y-auto transition-all duration-200"
-          style={{
-            width: sidebarOpen ? '240px' : '0px',
-            minWidth: sidebarOpen ? '240px' : '0px',
-            backgroundColor: '#0d3a1c',
-            overflow: sidebarOpen ? 'auto' : 'hidden',
-          }}
+          className={`
+            fixed lg:static inset-y-0 left-0 z-40
+            w-64 shrink-0 flex flex-col overflow-y-auto
+            transform transition-transform duration-200 ease-in-out
+            ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+            lg:translate-x-0
+          `}
+          style={{ backgroundColor: '#0d3a1c' }}
         >
           {/* Section label */}
           <div
@@ -188,6 +205,7 @@ const Layout = () => {
                 <Link
                   key={to}
                   to={to}
+                  onClick={() => setSidebarOpen(false)}
                   className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all whitespace-nowrap"
                   style={{
                     color: active ? '#f5a623' : '#c8e6c9',
@@ -239,17 +257,17 @@ const Layout = () => {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto bg-gray-50">
+        <main className="flex-1 overflow-y-auto bg-gray-50 w-full min-w-0">
           {/* Page content header strip */}
           <div
-            className="w-full px-6 py-2 text-xs font-semibold text-white flex items-center gap-2"
+            className="w-full px-3 sm:px-6 py-2 text-xs font-semibold text-white flex items-center gap-2"
             style={{ backgroundColor: '#1a5c28' }}
           >
             <span>Coal India Limited</span>
             <span style={{ color: '#f5a623' }}>›</span>
             <span style={{ color: '#f5a623' }}>Maintenance Board</span>
           </div>
-          <div className="p-6">
+          <div className="p-3 sm:p-6">
             <Outlet />
           </div>
         </main>
