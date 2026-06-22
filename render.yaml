@@ -1,0 +1,47 @@
+# Render Blueprint — deploys the backend (Node web service with WebSockets)
+# and the frontend (static site) together.
+#
+# Deploy: https://dashboard.render.com  ->  New  ->  Blueprint  ->  pick this repo.
+#
+# NOTE: Render service URLs are https://<name>.onrender.com. The cross-service
+# URLs below assume the names stay as written. If Render appends a suffix
+# (because a name is already taken globally), update FRONTEND_URL and
+# VITE_API_URL to the real URLs in the dashboard and redeploy.
+
+services:
+  # ---------- Backend API (Express + Socket.io) ----------
+  - type: web
+    name: maintenance-board-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: JWT_SECRET
+        generateValue: true            # Render generates a strong secret
+      - key: MONGODB_URI
+        sync: false                     # secret — paste your Atlas URI in the dashboard
+      - key: FRONTEND_URL
+        value: https://maintenance-board-web.onrender.com
+
+  # ---------- Frontend (Vite static build) ----------
+  - type: web
+    name: maintenance-board-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://maintenance-board-api.onrender.com/api
+    routes:
+      # SPA fallback so React Router deep links / refreshes work
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -31,8 +31,14 @@ connectDB();
 
 initializeSocket(httpServer);
 
+// FRONTEND_URL may be a comma-separated list (e.g. local + production origin)
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: allowedOrigins,
   credentials: true,
 }));
 app.use(express.json());

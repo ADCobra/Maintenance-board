@@ -5,12 +5,17 @@ import User from '../models/User.js';
 let io = null;
 
 export const initializeSocket = (server) => {
+  const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+
   io = new Server(server, {
     cors: {
-      origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+      origin: allowedOrigins,
       credentials: true,
     },
-  });
+  });
   io.use(async (socket, next) => {
     try {
       const token = socket.handshake.auth.token;
@@ -35,8 +40,8 @@ export const initializeSocket = (server) => {
   });
 
   io.on('connection', (socket) => {
-    console.log(`User connected: ${socket.userId}`);
-    socket.join(`user:${socket.userId}`);
+    console.log(`User connected: ${socket.userId}`);
+    socket.join(`user:${socket.userId}`);
     socket.join(`role:${socket.userRole}`);
 
     socket.on('disconnect', () => {
@@ -52,7 +57,7 @@ export const getIO = () => {
     throw new Error('Socket.io not initialized');
   }
   return io;
-};
+};
 export const notifyUser = (userId, event, data) => {
   if (io) {
     io.to(`user:${userId}`).emit(event, data);
