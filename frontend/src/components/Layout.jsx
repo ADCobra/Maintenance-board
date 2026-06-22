@@ -78,7 +78,7 @@ const Layout = () => {
   });
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+    <div className="flex flex-col h-dvh overflow-hidden" style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}>
 
       {/* Top utility bar – Coal India black bar */}
       <div className="w-full bg-black text-white text-[11px] sm:text-xs flex items-center justify-between px-3 sm:px-4 py-1 shrink-0 z-50">

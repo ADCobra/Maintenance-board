@@ -467,7 +467,7 @@ const CustomDashboard = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
         <h1 className="text-3xl font-bold text-foreground">Custom Dashboard</h1>
         <div className="flex gap-2">
           <button

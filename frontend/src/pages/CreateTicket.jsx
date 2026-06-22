@@ -105,7 +105,7 @@ const CreateTicket = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Create New Ticket</h1>
           {selectedTemplate && (
