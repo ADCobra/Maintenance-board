@@ -1,0 +1,364 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "Poppins", sans-serif;
+  --font-mono: "Poppins", monospace;
+  --font-serif: "Poppins", serif;
+  --radius: 1.4rem;
+  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
+  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
+  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
+  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
+  --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+  --tracking-normal: var(--tracking-normal);
+  --shadow-2xl: var(--shadow-2xl);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-md: var(--shadow-md);
+  --shadow: var(--shadow);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-2xs: var(--shadow-2xs);
+  --spacing: var(--spacing);
+  --letter-spacing: var(--letter-spacing);
+  --shadow-offset-y: var(--shadow-offset-y);
+  --shadow-offset-x: var(--shadow-offset-x);
+  --shadow-spread: var(--shadow-spread);
+  --shadow-blur: var(--shadow-blur);
+  --shadow-opacity: var(--shadow-opacity);
+  --color-shadow-color: var(--shadow-color);
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
+:root {
+  --radius: 0.375rem;
+  /* Coal India palette */
+  --background: oklch(0.980 0 0);
+  --foreground: oklch(0.12 0 0);
+  --card: oklch(1.0 0 0);
+  --card-foreground: oklch(0.12 0 0);
+  --popover: oklch(1.0 0 0);
+  --popover-foreground: oklch(0.12 0 0);
+  /* Forest green – Coal India brand primary */
+  --primary: oklch(0.38 0.12 145);
+  --primary-foreground: oklch(1.0 0 0);
+  --secondary: oklch(0.94 0.03 145);
+  --secondary-foreground: oklch(0.25 0.08 145);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.46 0 0);
+  /* Golden amber accent – Coal India highlight */
+  --accent: oklch(0.79 0.18 83);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.62 0.19 23);
+  --destructive-foreground: oklch(1.0 0 0);
+  --border: oklch(0.88 0.01 145);
+  --input: oklch(0.93 0 0);
+  --ring: oklch(0.38 0.12 145);
+  /* Charts */
+  --chart-1: oklch(0.38 0.12 145);
+  --chart-2: oklch(0.79 0.18 83);
+  --chart-3: oklch(0.55 0.15 145);
+  --chart-4: oklch(0.65 0.14 83);
+  --chart-5: oklch(0.50 0 0);
+  /* Sidebar – dark forest green */
+  --sidebar: oklch(0.22 0.07 145);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: oklch(0.79 0.18 83);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.30 0.08 145);
+  --sidebar-accent-foreground: oklch(0.79 0.18 83);
+  --sidebar-border: oklch(0.30 0.07 145);
+  --sidebar-ring: oklch(0.79 0.18 83);
+  --font-sans: 'Segoe UI', Arial, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Courier New', monospace;
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-opacity: 0.16;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 2px;
+  --letter-spacing: 0em;
+  --spacing: 0.27rem;
+  --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
+  --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
+  --shadow-sm: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 1px 2px -1px hsl(0 0% 0% / 0.16);
+  --shadow: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 1px 2px -1px hsl(0 0% 0% / 0.16);
+  --shadow-md: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 2px 4px -1px hsl(0 0% 0% / 0.16);
+  --shadow-lg: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 4px 6px -1px hsl(0 0% 0% / 0.16);
+  --shadow-xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 8px 10px -1px hsl(0 0% 0% / 0.16);
+  --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.40);
+  --tracking-normal: 0em;
+}
+
+.dark {
+  /* Coal India dark palette – deep green surfaces, gold accents */
+  --background: oklch(0.20 0.02 150);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.25 0.025 150);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.25 0.025 150);
+  --popover-foreground: oklch(0.96 0 0);
+  /* Brighter green so it reads on dark surfaces */
+  --primary: oklch(0.72 0.16 145);
+  --primary-foreground: oklch(0.15 0.03 150);
+  --secondary: oklch(0.30 0.03 150);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.30 0.03 150);
+  --muted-foreground: oklch(0.74 0.02 150);
+  --accent: oklch(0.79 0.18 83);
+  --accent-foreground: oklch(0.15 0.03 150);
+  --destructive: oklch(0.71 0.17 22);
+  --border: oklch(0.33 0.03 150);
+  --input: oklch(0.33 0.03 150);
+  --ring: oklch(0.79 0.18 83);
+  --chart-1: oklch(0.72 0.16 145);
+  --chart-2: oklch(0.79 0.18 83);
+  --chart-3: oklch(0.60 0.14 145);
+  --chart-4: oklch(0.68 0.15 83);
+  --chart-5: oklch(0.74 0.02 150);
+  --sidebar: oklch(0.18 0.03 150);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.79 0.18 83);
+  --sidebar-primary-foreground: oklch(0.15 0.03 150);
+  --sidebar-accent: oklch(0.30 0.03 150);
+  --sidebar-accent-foreground: oklch(0.79 0.18 83);
+  --sidebar-border: oklch(0.33 0.03 150);
+  --sidebar-ring: oklch(0.79 0.18 83);
+  --destructive-foreground: oklch(1.0000 0 0);
+  --radius: 0.375rem;
+  --font-sans: Plus Jakarta Sans, sans-serif;
+  --font-serif: Lora, serif;
+  --font-mono: IBM Plex Mono, monospace;
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-opacity: 0.16;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 2px;
+  --letter-spacing: -0.025em;
+  --spacing: 0.27rem;
+  --shadow-2xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
+  --shadow-xs: 0px 2px 3px 0px hsl(0 0% 0% / 0.08);
+  --shadow-sm: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 1px 2px -1px hsl(0 0% 0% / 0.16);
+  --shadow: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 1px 2px -1px hsl(0 0% 0% / 0.16);
+  --shadow-md: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 2px 4px -1px hsl(0 0% 0% / 0.16);
+  --shadow-lg: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 4px 6px -1px hsl(0 0% 0% / 0.16);
+  --shadow-xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.16), 0px 8px 10px -1px hsl(0 0% 0% / 0.16);
+  --shadow-2xl: 0px 2px 3px 0px hsl(0 0% 0% / 0.40);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    letter-spacing: var(--tracking-normal);
+  }
+  button {
+    cursor: pointer;
+  }
+  
+  /* Prevent zoom behaviors on canvas only */
+  .canvas-container {
+    touch-action: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Additional zoom prevention */
+  .canvas-container * {
+    touch-action: none !important;
+  }
+  
+  /* Prevent browser zoom shortcuts */
+  body {
+    zoom: 1 !important;
+    -moz-transform: scale(1) !important;
+    -webkit-transform: scale(1) !important;
+    transform: scale(1) !important;
+  }
+
+  /* Modern Modal Animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-from-bottom {
+    from {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-in {
+    animation-fill-mode: both;
+  }
+
+  .fade-in {
+    animation-name: fade-in;
+  }
+
+  .slide-in-from-bottom-4 {
+    animation-name: slide-in-from-bottom;
+  }
+
+  .duration-200 {
+    animation-duration: 200ms;
+  }
+
+  .duration-300 {
+    animation-duration: 300ms;
+  }
+}
+
+/*
+ Custom Dashboard Drag and Drop Styles */
+.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+.drag-over {
+  border-color: hsl(var(--primary)) !important;
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+[draggable="true"] {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+[draggable="true"]:active {
+  cursor: grabbing !important;
+}
+
+/* Smooth transitions for drag and drop */
+.widget-container {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.widget-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================
+   Dark-mode safety net for hardcoded Tailwind color utilities.
+   Many pages use literal bg-white / text-gray-900 etc. which do
+   NOT follow the theme tokens. Without these remaps they'd either
+   stay white islands in dark mode, or (when mixed with semantic
+   tokens) hide text (light-on-light / dark-on-dark). These scoped
+   `.dark` rules out-specify the single-class utilities so every
+   page darkens consistently and text stays legible.
+   Use `.ci-keep-white` to opt an element out (e.g. the logo).
+   ============================================================ */
+.dark .bg-white:not(.ci-keep-white) {
+  background-color: var(--card) !important;
+}
+.dark .bg-gray-50:not(.ci-keep-white) {
+  background-color: var(--background) !important;
+}
+.dark .bg-gray-100:not(.ci-keep-white),
+.dark .bg-gray-200:not(.ci-keep-white) {
+  background-color: var(--muted) !important;
+}
+
+/* Dark text utilities -> light foreground */
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700,
+.dark .text-black {
+  color: var(--foreground) !important;
+}
+/* Secondary/muted text -> muted-foreground (still high enough contrast) */
+.dark .text-gray-600,
+.dark .text-gray-500,
+.dark .text-gray-400 {
+  color: var(--muted-foreground) !important;
+}
+
+/* Borders / dividers */
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  border-color: var(--border) !important;
+}
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border) !important;
+}
+
+/* Gray hover states -> subtle muted hover */
+.dark .hover\:bg-gray-50:hover,
+.dark .hover\:bg-gray-100:hover,
+.dark .hover\:bg-gray-200:hover {
+  background-color: var(--muted) !important;
+}
+.dark .hover\:text-gray-900:hover,
+.dark .hover\:text-gray-800:hover,
+.dark .hover\:text-gray-700:hover {
+  color: var(--foreground) !important;
+}
+
+/* Theme transition for a smooth switch */
+body,
+.bg-white,
+.bg-gray-50,
+.bg-gray-100 {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}

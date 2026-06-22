@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "codetree": {
+      "command": "node",
+      "args": [
+        "/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/server/mcp-server.js"
+      ],
+      "cwd": "/Users/ajiteshdwivedi/Desktop/Support-Desk-master",
+      "env": {
+        "CODETREE_PROJECT_ROOT": "/Users/ajiteshdwivedi/Desktop/Support-Desk-master"
+      }
+    }
+  }
+}

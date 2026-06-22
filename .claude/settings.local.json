@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv /Users/ajiteshdwivedi/Desktop/Support-Desk-master /Users/ajiteshdwivedi/Desktop/maintenance-board && echo \"Done\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npm run *)",
+      "Bash(echo \"Backend PID: $!\")",
+      "Bash(sleep 5 && cat /tmp/frontend.log)",
+      "Read(//private/tmp/**)",
+      "mcp__codetree__codetree_read",
+      "Bash(gh auth *)"
+    ],
+    "additionalDirectories": [
+      "/Users/ajiteshdwivedi/Desktop"
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/pre-tool-use.js\""
+          }
+        ],
+        "matcher": "Read|Grep|Glob"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/post-tool-use.js\""
+          }
+        ],
+        "matcher": "Read|Grep|Glob|Edit|Write|codetree_read|codetree_search"
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/session-start.js\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/stop.js\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/user-prompt-submit.js\""
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/pre-compact.js\""
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/ajiteshdwivedi/.vscode/extensions/rishuni30.codetree-claude-1.8.8/bundled-codetree/dist/hook/post-compact.js\""
+          }
+        ]
+      }
+    ]
+  }
+}
